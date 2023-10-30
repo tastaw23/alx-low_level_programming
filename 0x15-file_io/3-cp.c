@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *create_buffer(char *file);
+char *create_resto(char *file);
 void close_file(int fd);
 
 /**
@@ -58,8 +58,8 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int from, to, r, w;
-	char *buffer;
+	int de, a, v, m;
+	char *resto;
 
 	if (argc != 3)
 	{
@@ -67,37 +67,37 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	buffer = create_buffer(argv[2]);
-	from = open(argv[1], O_RDONLY);
-	r = read(from, buffer, 1024);
-	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	resto = create_resto(argv[2]);
+	de = open(argv[1], O_RDONLY);
+	v = read(de, resto, 1024);
+	a = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-		if (from == -1 || r == -1)
+		if (de == -1 || v == -1)
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Can't read from file %s\n", argv[1]);
-			free(buffer);
+			free(resto);
 			exit(98);
 		}
 
-		w = write(to, buffer, r);
-		if (to == -1 || w == -1)
+		m = write(a, resto, v);
+		if (a == -1 || m == -1)
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", argv[2]);
-			free(buffer);
+			free(resto);
 			exit(99);
 		}
 
-		r = read(from, buffer, 1024);
-		to = open(argv[2], O_WRONLY | O_APPEND);
+		v = read(de, resto, 1024);
+		a = open(argv[2], O_WRONLY | O_APPEND);
 
-	} while (r > 0);
+	} while (v > 0);
 
-	free(buffer);
-	close_file(from);
-	close_file(to);
+	free(resto);
+	close_file(de);
+	close_file(a);
 
 	return (0);
 }

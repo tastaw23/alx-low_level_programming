@@ -1,29 +1,20 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "lists.h"
 
-int main(void)
+/**
+ * dlistint_len - Get the number of elements in a doubly linked list
+ * @h: Pointer to the head of the list
+ * Return: Number of nodes
+ */
+size_t dlistint_len(const dlistint_t *h)
 {
-    dlistint_t *head;
-    dlistint_t *new;
-    dlistint_t hello = {8, NULL, NULL};
-    size_t n;
+    size_t count = 0;
 
-    head = &hello;
-    new = malloc(sizeof(dlistint_t));
-    if (new == NULL)
+    while (h != NULL)
     {
-        dprintf(2, "Error: Can't malloc\n");
-        return (EXIT_FAILURE);
+        h = h->next;
+        count++;
     }
-    new->n = 9;
-    head->prev = new;
-    new->next = head;
-    new->prev = NULL;
-    head = new;
-    n = dlistint_len(head);
-    printf("-> %lu elements\n", n);
-    free(new);
-    return (EXIT_SUCCESS);
+
+    return count;
 }
 

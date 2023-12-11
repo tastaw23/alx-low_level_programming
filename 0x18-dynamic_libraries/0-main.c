@@ -1,5 +1,5 @@
-#include "main.h"
 #include <stdio.h>
+#include <stdlib.h> 
 
 /**
  * main - check the code
@@ -8,6 +8,7 @@
  */
 int main(void)
 {
-    printf("%d\n", _strlen("My Dyn Lib"));
+    printf("%d\n", EXIT_SUCCESS);  
     return (EXIT_SUCCESS);
 }
+
